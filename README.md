@@ -1,72 +1,67 @@
-# Book_Review_SA_Crawling
+# 📚 Book_Review_SA: 도서 리뷰 감성 분석을 위한 크롤링 시스템
 
-이 문서는 `Book_Review_SA` 프로젝트의 핵심 부분인 **도서 리뷰 데이터 크롤링**에 대한 내용을 담고 있습니다. 주요 파일로는 알라딘 도서 리뷰를 수집하는 크롤러와 Streamlit 애플리케이션에서 검색 결과를 가져오는 데 사용되는 `crawling.py` (네이버 도서 리뷰 크롤러)가 있습니다. 각 크롤러의 기능과 설치/실행 방법을 상세히 설명합니다.
+이 문서는 `Book_Review_SA` 프로젝트의 핵심 기능 중 하나인 **도서 리뷰 크롤링**에 대해 설명합니다.  
+알라딘과 네이버에서 도서 리뷰 데이터를 수집하는 크롤러의 역할과 사용 방법을 다루며, 각각의 크롤러는 다음과 같은 목적에 활용됩니다:
+
+- **알라딘**: 모델 학습을 위한 데이터 크롤링 사이트
+- **네이버 쇼핑**: 실시간 검색 기반 리뷰 수집   
+
+각 크롤러는 Streamlit 애플리케이션과 연동되어 감성 분석에 필요한 데이터를 제공합니다.
 
 ---
 
-
-
-
-# 알라딘 도서 리뷰 크롤러 (Aladdin Book Review Crawler)
+## 🌀 알라딘 도서 리뷰 크롤러  
+> **Aladdin Book Review Crawler**
 
 ![Python](https://img.shields.io/badge/Python-3.x-blue.svg)
 ![Selenium](https://img.shields.io/badge/Selenium-Web%20Automation-orange.svg)
 ![BeautifulSoup](https://img.shields.io/badge/BeautifulSoup-HTML%20Parsing-green.svg)
 ![CSV](https://img.shields.io/badge/Output-CSV-lightgrey.svg)
 
-알라딘 웹사이트에서 도서 리뷰 데이터를 자동으로 수집하는 Python 기반의 웹 크롤러입니다. Selenium과 BeautifulSoup을 활용하여 동적으로 로드되는 콘텐츠를 처리하고, JSON-LD 형식의 메타데이터를 추출하여 책 정보를 풍부하게 수집합니다. 수집된 리뷰는 CSV 파일로 저장됩니다.
+Selenium과 BeautifulSoup을 활용하여 **알라딘 웹사이트**에서 도서 리뷰 데이터를 자동 수집하는 크롤러입니다.  
+JSON-LD 기반의 메타데이터와 리뷰를 수집하여 CSV 파일로 저장합니다.
+
+### 🔧 주요 기능
+- ✅ **다중 페이지 크롤링**: 설정된 시작 ~ 끝 페이지 탐색
+- ✅ **도서 메타데이터 추출**: 제목, 저자, 출판사, 장르, 평점, 리뷰 수 등
+- ✅ **모든 리뷰 수집**: "더보기" 클릭을 통해 리뷰 전체 로드
+- ✅ **웹드라이버 자동 관리**: `webdriver_manager` 사용으로 드라이버 설치 자동화
+- ✅ **중간 저장 기능**: 10페이지마다 CSV로 자동 저장 → 오류 대비
+- ✅ **결과 출력**: 구조화된 CSV 파일로 저장
 
 ---
 
-## 🌟 주요 기능
-
-* **다중 페이지 크롤링**: 설정된 시작 페이지부터 끝 페이지까지 알라딘 도서 목록을 탐색합니다.
-* **도서 상세 정보 추출**: 각 도서 페이지에서 제목, 저자, 출판사, 장르, 평점, 리뷰 수 등의 메타데이터를 JSON-LD에서 추출합니다.
-* **리뷰 데이터 수집**: "더보기" 버튼을 자동으로 클릭하여 모든 리뷰를 로드하고, 각 리뷰의 내용과 별점을 수집합니다.
-* **안정적인 웹 드라이버 관리**: `webdriver_manager`를 사용하여 Chrome 드라이버를 자동으로 설치하고 관리하여 환경 설정의 번거로움을 줄입니다.
-* **중간 저장 기능**: 크롤링 과정 중 특정 페이지 단위(10페이지마다)로 데이터를 CSV 파일로 중간 저장하여, 예기치 않은 오류 발생 시 데이터 손실을 최소화합니다.
-* **CSV 출력**: 수집된 모든 도서 정보 및 리뷰 데이터를 구조화된 CSV 파일로 저장합니다.
-
-
-
-
-# 네이버 도서 리뷰 크롤러 (Naver Book Review Crawler)
+## 🌐 네이버 도서 리뷰 크롤러  
+> **Naver Book Review Crawler**
 
 ![Python](https://img.shields.io/badge/Python-3.x-blue.svg)
 ![Selenium](https://img.shields.io/badge/Selenium-Web%20Automation-orange.svg)
 ![BeautifulSoup](https://img.shields.io/badge/BeautifulSoup-HTML%20Parsing-green.svg)
 ![Pandas](https://img.shields.io/badge/Data%20Analysis-Pandas-lightgrey.svg)
 
-네이버 쇼핑의 도서 섹션에서 책 제목과 사용자 리뷰 데이터를 자동으로 수집하는 Python 기반의 웹 크롤러입니다. Selenium과 Beautiful Soup을 활용하여 동적으로 로드되는 콘텐츠를 효과적으로 처리하고 필요한 정보를 추출합니다.
+Selenium과 BeautifulSoup을 활용하여 **네이버 쇼핑 도서 섹션**에서 사용자 리뷰를 자동 수집하는 크롤러입니다.  
+Streamlit UI와 연동되어 사용자의 검색어 기반 리뷰 수집을 지원합니다.
+
+### ✨ 주요 기능
+- 🔍 **검색 기반 크롤링**: 입력된 키워드로 도서 검색
+- 📖 **도서 상세 페이지 방문**: 검색 결과 목록 순회
+- 📝 **도서 정보 추출**: 제목 중심 (향후 확장 가능)
+- 💬 **모든 리뷰 수집**: "리뷰" 탭 → "더보기" 반복 클릭
+- ⚙️ **웹드라이버 자동 관리**: 최신 Chrome 드라이버 자동 설치
+- 📁 **결과 저장**: 책 제목 + 리뷰 내용을 CSV로 저장
 
 ---
-
-## ✨ 주요 기능
-
-* **검색 기반 크롤링**: 사용자가 입력한 검색어에 따라 네이버 쇼핑 도서 검색 결과를 탐색합니다.
-* **다중 도서 상세 페이지 방문**: 검색된 각 도서의 상세 페이지로 이동하여 정보를 추출합니다.
-* **도서 정보 추출**: 각 도서 페이지에서 제목을 추출합니다. (필요시 저자, 출판사, 평점 등 추가 정보 확장 가능)
-* **모든 리뷰 로드 및 수집**: "리뷰" 탭을 클릭하고, "더보기" 버튼을 자동으로 반복 클릭하여 해당 책의 모든 사용자 리뷰를 로드하고 수집합니다.
-* **안정적인 웹 드라이버 관리**: `webdriver_manager` 라이브러리를 사용하여 Chrome 드라이버를 자동으로 다운로드 및 관리함으로써, 환경 설정의 번거로움을 줄이고 항상 최신 드라이버를 사용합니다.
-* **CSV 출력**: 수집된 책 제목과 모든 리뷰 데이터를 구조화된 CSV 파일로 저장합니다.
-
----
-
-
 
 ## 🛠️ 공통 설치 및 실행 방법
 
-### 1. 전제 조건
+### ✅ 전제 조건
+- Python 3.x 설치  
+  → [Python 공식 다운로드](https://www.python.org/downloads/)
+- Google Chrome 설치  
 
-* **Python 3.x**: 파이썬이 설치되어 있어야 합니다.
-    [Python 공식 웹사이트](https://www.python.org/downloads/)에서 다운로드할 수 있습니다.
-* **Google Chrome**: 웹 크롤링에 Chrome 브라우저가 사용됩니다.
+### 📦 필수 라이브러리 설치
 
-### 2. 의존성 설치
-
-프로젝트를 실행하기 전에 필요한 라이브러리들을 설치해야 합니다. 터미널 또는 명령 프롬프트에서 다음 명령어를 실행하세요:
+아래 명령어로 필요한 라이브러리를 설치하세요:
 
 ```bash
 pip install selenium beautifulsoup4 webdriver-manager
-```
-
